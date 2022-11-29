@@ -88,7 +88,7 @@ where
 
 impl<Data: Clone + std::fmt::Display> std::fmt::Display for Tape<Data> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.display(&'>'))
+        write!(f, "{}", self.display(&">>"))
     }
 }
 
