@@ -1,4 +1,4 @@
-use std::fmt::Display;
+// use std::fmt::Display;
 
 use parser::turing_machine_movements;
 use turingmachine::{
@@ -54,10 +54,19 @@ mod parser;
 // }
 
 fn main() {
-    let ((default_data, default_state), moves) =
-        turing_machine_movements(include_str!("../unary_add.tm")).unwrap();
-    let tape_og = "1 + 1 1 =";
-    let tape = tape_og
+    let mut args = std::env::args();
+    args.next();
+    let tm_file = args.next().unwrap();
+    let contents = std::fs::read_to_string(tm_file).unwrap();
+    let tape = args.collect::<Vec<_>>().join(" ");
+    let ((default_data, default_state), moves) = turing_machine_movements(
+        // include_str!("../unary_add.tm")
+        &contents,
+    )
+    .unwrap();
+    // let tape_og = "1 + 1 1 =";
+
+    let tape = tape
         .split_ascii_whitespace()
         .filter(|s| !s.is_empty())
         .map(String::from)
